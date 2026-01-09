@@ -1,0 +1,25 @@
++   to setup the project in cwd:
+    `npm init -y`
+
+    this creates a `package.json` file
+
++   web framework for handling routes:
+    `npm install express`
+
++   typescript compiler (local):
+    `npm install -D typescript`
+
++   runs typescript files directly without compiling:
+    `npm install -D ts-node`
+
++   auto-restarts server on file changes:
+    `npm install -D nodemon`
+
++   typescript type definitions for node.js:
+    `npm install -D @types/node`
+
++   typescript type definitions for express:
+    `npm install -D @types/express`
+
++   loads environment variables from .env file:
+    `npm install dotenv`
