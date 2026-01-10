@@ -23,3 +23,10 @@
 
 +   loads environment variables from .env file:
     `npm install dotenv`
+
++   openai sdk for whisper transcription:
+    `npm install openai`
+
++   converts time strings to milliseconds, allows me do ms("10s"):
+    `npm i ms@2.1.3`
+    `npm i -D @types/ms`, `-D` means it's only available in the development environment
