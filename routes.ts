@@ -6,7 +6,7 @@ const appRouter = express.Router();
 appRouter.post(
     "/audio", 
     express.raw({ 
-        type: "audio/*",
+        type: ["audio/*", "video/webm"],
         limit: "10mb"
     }), 
     uploadIdeaAudio

@@ -5,14 +5,16 @@ import uploadTranscription from "../helpers/uploadTranscription";
 
 
 // TODO large audio, limit user input, think api has 10MB limit
-// TODO can we enforce data types, not sure what whisper ai receives
 const uploadIdeaAudio: RequestHandler = async (req: Request, res: Response) => {
     const audioBuffer: Buffer = req.body;
+    const contentType = req.get("Content-Type");
+    const fileExt = getExtensionFromContentType(contentType);
 
+    console.log("audioBuffer:", audioBuffer);
     let transcribedText: string;
     try {
-        transcribedText = await transcribeAudio(audioBuffer);
-    } catch (error) {
+        transcribedText = await transcribeAudio(audioBuffer, fileExt);
+    } catch (err) {
         res.json({
             success: false,
             message: "Couldn't transcribe text"
@@ -39,3 +41,14 @@ const uploadIdeaAudio: RequestHandler = async (req: Request, res: Response) => {
 };
 
 export default uploadIdeaAudio;
+
+const getExtensionFromContentType = (contentType?: string): string => {
+    if (!contentType) return "";
+
+    const subtype = contentType.split('/')[1];
+
+    // content-type can include parameters after semicolon
+    // e.g., 'audio/mpeg; charset=utf-8' or 'text/html; boundary=something'
+    // split(';')[0] removes parameters, keeps just the subtype
+    return subtype?.split(';')[0] || "";
+}

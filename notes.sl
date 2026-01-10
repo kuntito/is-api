@@ -15,6 +15,9 @@
 +   auto-restarts server on file changes:
     `npm install -D nodemon`
 
++   nodemon replacement, it allows display of `console.log`s
+    `npm install -D tsx`
+
 +   typescript type definitions for node.js:
     `npm install -D @types/node`
 
@@ -80,3 +83,7 @@
     
     you'll get a URL like https://is-api-xxxx.onrender.
     `
+    
++   allows you to search previous commands by prefix using arrow keys (powershell only):
+    `Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward`
+    `Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward`

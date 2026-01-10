@@ -1,9 +1,9 @@
 import OpenAI, { toFile } from "openai";
 import openaiClient from "../services/openaiClient";
 
-const transcribeAudio = async (audioBuffer: Buffer): Promise<string> => {
+const transcribeAudio = async (audioBuffer: Buffer, extension: string): Promise<string> => {
     const transcription = await openaiClient.audio.transcriptions.create({
-        file: await toFile(audioBuffer, "audio"),
+        file: await toFile(audioBuffer, `audio.${extension}`),
         model: "whisper-1",
     });
 
