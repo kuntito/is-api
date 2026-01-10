@@ -33,8 +33,9 @@ ${categoriesAsString}
     
 first, categorize the idea. 
 
-second, respond with one quip based on the category rules.
-however, if idea doesn't sound like an app idea and sounds like rambling or something unrelated, insult the user at your discretion.
+second, respond with one quip based on the category rules. keep the quip within a single sentence.
+
+in the event, the idea doesn't sound like an app idea instead sounds like rambling or something unrelated, insult the user at your discretion.
 
 category rules:
 1. Visionary - confident, reverent, glazing
