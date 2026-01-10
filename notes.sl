@@ -39,3 +39,23 @@
 
 +   s3 bucket setup
     `https://www.youtube.com/shorts/XMByxkxM2N4`
+
++   how Claude set up `dist`:
+
+    Claude:
+    `
+    when I ran npm run build, it executed tsc (the TypeScript compiler).       
+
+    tsc reads your tsconfig.json, sees outDir: "./dist", then:
+
+    1. Finds all your .ts files
+    2. Compiles each one to .js
+    3. Outputs them to dist/ with the same folder structure
+
+    So:
+    server.ts           → dist/server.js
+    routes/index.ts     → dist/routes/index.js
+    helpers/foo.ts      → dist/helpers/foo.js
+
+    The dist folder didn't exist before. tsc created it automatically.
+    `

@@ -2,7 +2,7 @@ import express, { Express } from "express";
 import appRouter from "./routes";
 
 const app: Express = express();
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 
 // allows project to parse JSON in request body
 app.use(express.json());
