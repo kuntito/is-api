@@ -21,31 +21,21 @@ const uploadIdeaAudio: RequestHandler = async (req: Request, res: Response) => {
     }
 
     try {
-        await uploadTranscription(transcribedText);
+        const [_, ideaJudgement] = await Promise.all([
+            uploadTranscription(transcribedText),
+            getIdeaJudgement(transcribedText)
+        ]);
+
+        res.json({
+            success: true,
+            message: ideaJudgement
+        });
     } catch (error) {
         res.json({
             success: false,
-            message: "Couldn't upload transcription"
+            message: "Something went wrong"
         });
-        return;
     }
-
-
-    let ideaJudgement: string;
-    try {
-        ideaJudgement = await getIdeaJudgement(transcribedText);
-    } catch (error) {
-        res.json({
-            success: false,
-            message: "Couldn't judge idea"
-        });
-        return;
-    }
-
-    res.json({
-        success: true,
-        message: ideaJudgement
-    });
 };
 
 export default uploadIdeaAudio;
