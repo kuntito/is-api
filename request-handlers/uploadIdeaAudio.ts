@@ -1,24 +1,37 @@
 import { Request, Response, RequestHandler } from "express";
-import OpenAI, { toFile } from "openai";
-import { envConfig } from "../envConfig/.envConfig";
 import transcribeAudio from "../helpers/transcribeAudio";
 import getIdeaJudgement from "../helpers/getIdeaJudgement";
 
 
-const openai = new OpenAI({ apiKey: envConfig.OPENAI_API_KEY });
-
-// TODO error handling, large audio, limit user input
+// TODO large audio, limit user input, think api has 10MB limit
 // TODO can we enforce data types, not sure what whisper ai receives
 const uploadIdeaAudio: RequestHandler = async (req: Request, res: Response) => {
     const audioBuffer: Buffer = req.body;
 
-    // TODO error handling..
-    const transcribedText = await transcribeAudio(audioBuffer);
-    const ideaJudgement = await getIdeaJudgement(transcribedText)
+    let transcribedText: string;
+    try {
+        transcribedText = await transcribeAudio(audioBuffer);
+    } catch (error) {
+        res.json({
+            success: false,
+            message: "Couldn't transcribe text"
+        });
+        return;
+    }
 
+    let ideaJudgement: string;
+    try {
+        ideaJudgement = await getIdeaJudgement(transcribedText);
+    } catch (error) {
+        res.json({
+            success: false,
+            message: "Couldn't judge idea"
+        });
+        return;
+    }
 
     res.json({
-        success: true, // TODO error handling
+        success: true,
         message: ideaJudgement
     });
 };
