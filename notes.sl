@@ -59,3 +59,24 @@
 
     The dist folder didn't exist before. tsc created it automatically.
     `
+
++   render setup:
+    `
+    1. Go to https://render.com and sign up (use GitHub)
+    2. Click New → Web Service
+    3. Connect your GitHub repo
+    4. Configure:
+        - Build Command: npm install && npm run build
+        - Start Command: npm start
+    5. Add your environment variables (click Environment):
+        - AWS_REGION
+        - AWS_ACCESS_KEY
+        - AWS_SECRET_ACCESS_KEY
+        - AWS_BUCKET_NAME
+        - Any others from your .env
+    6. Click Create Web Service
+
+    Render will build and deploy.
+    
+    you'll get a URL like https://is-api-xxxx.onrender.
+    `
