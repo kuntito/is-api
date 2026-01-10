@@ -6,6 +6,10 @@ dotenv.config();
 const requiredVariables = [
     "OPENAI_API_KEY",
     "GROK_API_KEY",
+    "AWS_REGION",
+    "AWS_ACCESS_KEY",
+    "AWS_SECRET_ACCESS_KEY",
+    "AWS_BUCKET_NAME",
     // "ENV_VAR_2",
 ] as const;
 

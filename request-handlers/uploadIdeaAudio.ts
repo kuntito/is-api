@@ -1,6 +1,7 @@
 import { Request, Response, RequestHandler } from "express";
 import transcribeAudio from "../helpers/transcribeAudio";
 import getIdeaJudgement from "../helpers/getIdeaJudgement";
+import uploadTranscription from "../helpers/uploadTranscription";
 
 
 // TODO large audio, limit user input, think api has 10MB limit
@@ -18,6 +19,17 @@ const uploadIdeaAudio: RequestHandler = async (req: Request, res: Response) => {
         });
         return;
     }
+
+    try {
+        await uploadTranscription(transcribedText);
+    } catch (error) {
+        res.json({
+            success: false,
+            message: "Couldn't upload transcription"
+        });
+        return;
+    }
+
 
     let ideaJudgement: string;
     try {
