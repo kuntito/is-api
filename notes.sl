@@ -6,6 +6,10 @@
 +   web framework for handling routes:
     `npm install express`
 
++   enables cross-origin requests for frontend integration:
+    `npm install cors`
+    `npm install -D @types/cors`
+
 +   typescript compiler (local):
     `npm install -D typescript`
 

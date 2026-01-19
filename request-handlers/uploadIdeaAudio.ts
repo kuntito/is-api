@@ -10,14 +10,14 @@ const uploadIdeaAudio: RequestHandler = async (req: Request, res: Response) => {
     const contentType = req.get("Content-Type");
     const fileExt = getExtensionFromContentType(contentType);
 
-    console.log("audioBuffer:", audioBuffer);
     let transcribedText: string;
     try {
         transcribedText = await transcribeAudio(audioBuffer, fileExt);
     } catch (err) {
         res.json({
             success: false,
-            message: "Couldn't transcribe text"
+            message: "Couldn't transcribe text",
+            debug: { contentType, fileExt }
         });
         return;
     }
