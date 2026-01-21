@@ -25,9 +25,3 @@ const execGeminiPrompt = async (prompt: string): Promise<BasicApiResponse> => {
 };
 
 export default execGeminiPrompt;
-
-const main = async () => {
-    console.log((await execGeminiPrompt("hello")).message);
-};
-
-main();
