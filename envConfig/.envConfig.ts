@@ -10,6 +10,7 @@ const requiredVariables = [
     "AWS_ACCESS_KEY",
     "AWS_SECRET_ACCESS_KEY",
     "AWS_BUCKET_NAME",
+    "GEMINI_API_KEY",
     // "ENV_VAR_2",
 ] as const;
 

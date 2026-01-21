@@ -91,3 +91,6 @@
 +   allows you to search previous commands by prefix using arrow keys (powershell only):
     `Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward`
     `Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward`
+
++   google gemini sdk for ai generation:
+    `npm install @google/genai`

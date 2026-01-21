@@ -2,3 +2,5 @@ node_modules
 dist
 .env
 *.log
+links.sl
+x-is_api
