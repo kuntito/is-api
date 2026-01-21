@@ -24,8 +24,16 @@ const responses: Record<IdeaCategory, string[]> = {
     ],
 };
 
+interface PromptDetails {
+    aiRole: string;
+    prompt: string;
+}
 
-const getIdeaJudgementPrompt = (idea: string): string => {
+const getRoleAndPrompt = (
+    idea: string,
+): PromptDetails => {
+    const aiRole = "you evaluate startup ideas based on their merit."
+
     const prompt = `
 classify this author of this idea into exactly one of the following categories: 
 
@@ -54,7 +62,7 @@ only respond with the quip as a string, do not include the category.
 `;
 
 
-    return prompt;
+    return {aiRole, prompt};
 };
 
-export default getIdeaJudgementPrompt;
+export default getRoleAndPrompt;

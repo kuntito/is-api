@@ -1,18 +1,17 @@
 import grokClient from "../services/grokClient";
-import getIdeaJudgementPrompt from "./getIdeaJudgementPrompt";
+import getRoleAndPrompt from "./getRoleAndPrompt";
 
 
 const getIdeaJudgement = async (idea: string) => {
 
-    const role = "you are grok, a highly intelligent ai assistant that evaluates startup ideas.";
-    const prompt = getIdeaJudgementPrompt(idea);
+    const {aiRole, prompt} = getRoleAndPrompt(idea);
 
     const result = await grokClient.responses.create({
         model: "grok-4",
         input: [
             {
                 role: "system",
-                content: role,
+                content: aiRole,
             },
             {
                 role: "user",
