@@ -13,12 +13,12 @@ const execGeminiPrompt = async (prompt: string): Promise<BasicApiResponse> => {
         }
 
         return {
-            success: true,
+            succeeds: true,
             message: response.text,
         };
     } catch (e) {
         return {
-            success: false,
+            succeeds: false,
             message: `error occurred, ${(e as Error).message}`,
         };
     }

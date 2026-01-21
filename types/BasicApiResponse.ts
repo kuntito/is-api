@@ -1,4 +1,4 @@
 export interface BasicApiResponse {
-    success: boolean;
+    succeeds: boolean;
     message: string;
 }
