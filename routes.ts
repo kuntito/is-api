@@ -1,5 +1,6 @@
 import express from "express";
 import uploadIdeaAudio from "./request-handlers/uploadIdeaAudio";
+import getTranscriptions from "./request-handlers/getTranscriptions";
 
 const appRouter = express.Router();
 
@@ -11,5 +12,7 @@ appRouter.post(
     }), 
     uploadIdeaAudio
 );
+
+appRouter.get("/transcriptions", getTranscriptions);
 
 export default appRouter;
