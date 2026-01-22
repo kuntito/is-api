@@ -1,11 +1,20 @@
 import { Request, Response, RequestHandler } from "express";
 import transcribeAudio from "../helpers/transcribeAudio";
-import getIdeaJudgement from "../helpers/getIdeaJudgement";
 import uploadTranscription from "../helpers/uploadTranscription";
+import analyzeTranscription, { TranscriptionResult } from "../helpers/analyzeTranscription";
 
+
+interface IdeaAnalysisResponse {
+    success: boolean,
+    debug?: object,
+    transcriptionResult?: TranscriptionResult;
+}
 
 // TODO large audio, limit user input, think api has 10MB limit
-const uploadIdeaAudio: RequestHandler = async (req: Request, res: Response) => {
+const uploadIdeaAudio: RequestHandler = async (
+    req: Request,
+    res: Response<IdeaAnalysisResponse>
+) => {
     const audioBuffer: Buffer = req.body;
     const contentType = req.get("Content-Type");
     const fileExt = getExtensionFromContentType(contentType);
@@ -13,29 +22,34 @@ const uploadIdeaAudio: RequestHandler = async (req: Request, res: Response) => {
     let transcribedText: string;
     try {
         transcribedText = await transcribeAudio(audioBuffer, fileExt);
-    } catch (err) {
+    } catch (e) {
         res.json({
             success: false,
-            message: "Couldn't transcribe text",
-            debug: { contentType, fileExt }
+            debug: { 
+                errorMessage: `${(e as Error).message}`,
+                contentType: contentType,
+                fileExt: fileExt 
+            }
         });
         return;
     }
 
     try {
-        const [_, ideaJudgement] = await Promise.all([
+        const [_, transcriptionResult] = await Promise.all([
             uploadTranscription(transcribedText),
-            getIdeaJudgement(transcribedText)
+            analyzeTranscription(transcribedText),
         ]);
 
         res.json({
             success: true,
-            message: ideaJudgement
+            transcriptionResult: transcriptionResult
         });
-    } catch (error) {
+    } catch (e) {
         res.json({
             success: false,
-            message: "Something went wrong"
+            debug: {
+                errorMessage: `${(e as Error).message}`
+            }
         });
     }
 };

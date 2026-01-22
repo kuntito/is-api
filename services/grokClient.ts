@@ -2,6 +2,7 @@ import ms from 'ms';
 import OpenAI from 'openai';
 import { envConfig } from '../envConfig/.envConfig';
 
+export const GROK_MODEL = "grok-4";
 const grokClient = new OpenAI({
     apiKey: envConfig.GROK_API_KEY,
     baseURL: "https://api.x.ai/v1",
